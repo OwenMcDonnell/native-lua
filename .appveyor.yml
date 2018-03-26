@@ -32,7 +32,6 @@ build_script:
   - ps: Get-Location
 
 before_test:
-  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
   - ps: Push-Location -Path $env:BUILD_DIR
   - ps: Push-Location -Path lua
   - ps: Set-Location -Path x64
@@ -49,7 +48,7 @@ before_test:
   - ps: lua.exe -v
   - ps: Set-Location ..
   - ps: Set-Location -Path Release
-  - ps: lua.exe -v
+  - ps: ./lua.exe -v
   - ps: Pop-Location
   - ps: Get-Location
   - ps: Write-Host "Simple interpreter version echoing test done..."
