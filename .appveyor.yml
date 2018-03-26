@@ -18,7 +18,7 @@ init:
   - git config --global core.autocrlf input
 
 build_script:
-  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+  
   - ps: Push-Location -Path msbuild
   - ps: Get-Location
   - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"
@@ -32,6 +32,7 @@ build_script:
   - ps: Get-Location
 
 before_test:
+  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
   - ps: Push-Location -Path $env:BUILD_DIR
   - ps: Push-Location -Path lua
   - ps: Set-Location -Path x64
